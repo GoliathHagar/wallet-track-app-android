@@ -1,2 +1,2 @@
-# wallet-track-app-android
+= wallet-track-app-android / Living Expenses
 A living expenses app to track spent money 
