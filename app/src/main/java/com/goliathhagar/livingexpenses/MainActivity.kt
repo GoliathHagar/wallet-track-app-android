@@ -10,7 +10,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.goliathhagar.livingexpenses.ui.components.MyNavigationBar
+import com.goliathhagar.livingexpenses.ui.routes.AppNavigation
 import com.goliathhagar.livingexpenses.ui.theme.LivingExpensesTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,29 +21,32 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LivingExpensesTheme {
-                HomeScreen()
-            }
+            HomeScreen()
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(){
-    Scaffold (
+    val navController = rememberNavController()
 
-        bottomBar = { MyNavigationBar() },
-    )
-    {
-            contentPadding ->
-        // Screen content
-        Box(modifier = Modifier.padding(contentPadding)) { /* ... */ }
+    LivingExpensesTheme {
+        Scaffold(
+
+            bottomBar = { MyNavigationBar(navController) },
+        )
+        { contentPadding ->
+            // Screen content
+            Box(modifier = Modifier.padding(contentPadding)) { /* ... */ }
+            AppNavigation(navController = navController)
+        }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun HomePreview() {
     LivingExpensesTheme {
         HomeScreen()
     }
